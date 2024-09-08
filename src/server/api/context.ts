@@ -1,20 +1,18 @@
 import "server-only";
-import { headers } from "next/headers";
+import { db } from "../db/index.ts";
 
-export const createContext = async () => {
-  const heads = new Headers(headers());
-  heads.set("x-trpc-source", "rsc");
-
+export const createTRPCContext = async (opts: { headers: Headers }) => {
   // const session = await getSession();
   const ctx = {
+    db,
     session: {
       user: "testing",
       email: "test@test.com",
     },
-    headers: heads,
+    ...opts,
   };
 
   return ctx;
 };
 
-export type Context = typeof createContext;
+export type Context = typeof createTRPCContext;

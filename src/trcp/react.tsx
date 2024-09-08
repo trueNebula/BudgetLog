@@ -2,7 +2,7 @@
 
 import SuperJSON from "superjson";
 import { PropsWithChildren, useState } from "react";
-import { createQueryClient } from "./query-clients.ts";
+import { createQueryClient } from "./query-client.ts";
 import { AppRouter } from "@/server/api/routers/_app.ts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
@@ -12,7 +12,7 @@ import {
   loggerLink,
 } from "@trpc/react-query";
 
-const trcp = createTRPCReact<AppRouter>();
+export const api = createTRPCReact<AppRouter>();
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
 const getQueryClient = () => {
@@ -25,28 +25,34 @@ const getQueryClient = () => {
 };
 
 const getBaseUrl = () => {
+  let origin = "";
   if (typeof window !== "undefined") return window.location.origin;
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
   return `http://localhost:${process.env.PORT ?? 3000}`;
 };
 
-function TrpcProvider({ children }: PropsWithChildren) {
+function TRPCReactProvider({ children }: PropsWithChildren) {
   const queryClient = getQueryClient();
   const [trpcClient] = useState(() =>
-    trcp.createClient({
+    api.createClient({
       links: [
         loggerLink({
           enabled: () => true,
         }),
         httpBatchLink({
-          url: getBaseUrl(),
-          fetch: async (input, init?) => {
-            const fetch = getFetch();
-            return fetch(input, {
-              ...init,
-              credentials: "include",
-            });
+          url: getBaseUrl() + "/api/trpc",
+          headers: () => {
+            const headers = new Headers();
+            headers.set("x-trpc-source", "nextjs-react");
+            return headers;
           },
+          // fetch: async (input, init?) => {
+          //   const fetch = getFetch();
+          //   return fetch(input, {
+          //     ...init,
+          //     credentials: "include",
+          //   });
+          // },
           transformer: SuperJSON,
         }),
       ],
@@ -54,10 +60,12 @@ function TrpcProvider({ children }: PropsWithChildren) {
   );
 
   return (
-    <trcp.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </trcp.Provider>
+    <QueryClientProvider client={queryClient}>
+      <api.Provider client={trpcClient} queryClient={queryClient}>
+        {children}
+      </api.Provider>
+    </QueryClientProvider>
   );
 }
 
-export default TrpcProvider;
+export default TRPCReactProvider;

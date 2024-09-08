@@ -8,7 +8,7 @@ const globalForDb = globalThis as unknown as {
 
 const url = process.env.DATABASE_URL || "";
 
-const conn = globalForDb.conn ?? postgres(url);
+const conn = globalForDb.conn ?? postgres(url, { prepare: false });
 if (process.env.NODE_ENV !== "production") {
   globalForDb.conn = conn;
 }

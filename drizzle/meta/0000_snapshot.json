@@ -1,11 +1,11 @@
 {
-  "id": "9ec7e6c2-eb70-4b29-abdb-0961556804a4",
+  "id": "575389d9-e1b9-4d3f-9380-a146f286757e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.test": {
-      "name": "test",
+    "public.buget-log_test": {
+      "name": "buget-log_test",
       "schema": "",
       "columns": {
         "id": {
@@ -22,7 +22,14 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"

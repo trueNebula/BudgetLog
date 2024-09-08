@@ -1,13 +1,20 @@
-import { createContext } from "@/server/api/context.ts";
+import { createTRPCContext } from "@/server/api/context.ts";
 import { appRouter } from "@/server/api/routers/_app.ts";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
+import { NextRequest } from "next/server";
 
-const handler = (req: Request) => {
+const createContext = async (req: NextRequest) => {
+  return createTRPCContext({
+    headers: req.headers,
+  });
+};
+
+const handler = (req: NextRequest) => {
   return fetchRequestHandler({
     endpoint: "/api/trpc",
     req,
     router: appRouter,
-    createContext: createContext,
+    createContext: () => createContext(req),
   });
 };
 
