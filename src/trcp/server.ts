@@ -1,10 +1,10 @@
 import { cache } from "react";
 import { headers } from "next/headers";
 import { createQueryClient } from "./query-client.ts";
-import { createTRPCContext } from "../server/api/context.ts";
-import { createCallerFactory } from "../server/api/trpc.ts";
+import { createTRPCContext } from "@/server/api/trpc.ts";
+import { createCallerFactory } from "@/server/api/trpc.ts";
 import { createHydrationHelpers } from "@trpc/react-query/rsc";
-import { appRouter, AppRouter } from "../server/api/routers/_app.ts";
+import { appRouter, AppRouter } from "@/server/api/routers/_app.ts";
 
 export const createCaller = createCallerFactory(appRouter);
 

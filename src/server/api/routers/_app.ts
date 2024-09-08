@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { router } from "../trpc.ts";
-import { test } from "../../db/schema.ts";
+import { test } from "@/server/db/schema.ts";
 import publicProcedure from "../procedures/public.ts";
 
 export const helloRouter = router({
@@ -13,10 +13,12 @@ export const helloRouter = router({
     .query(({ input }) => ({
       greeting: `Hello ${input.text} from tRPC!`,
     })),
+
   test: publicProcedure.query(async ({ ctx }) => {
     const result = await ctx.db.select().from(test);
     return result;
   }),
+
   addName: publicProcedure
     .input(z.object({ name: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {

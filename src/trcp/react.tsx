@@ -7,9 +7,9 @@ import { AppRouter } from "@/server/api/routers/_app.ts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   createTRPCReact,
-  getFetch,
-  httpBatchLink,
+  unstable_httpBatchStreamLink,
   loggerLink,
+  getFetch,
 } from "@trpc/react-query";
 
 export const api = createTRPCReact<AppRouter>();
@@ -39,20 +39,20 @@ function TRPCReactProvider({ children }: PropsWithChildren) {
         loggerLink({
           enabled: () => true,
         }),
-        httpBatchLink({
+        unstable_httpBatchStreamLink({
           url: getBaseUrl() + "/api/trpc",
           headers: () => {
             const headers = new Headers();
             headers.set("x-trpc-source", "nextjs-react");
             return headers;
           },
-          // fetch: async (input, init?) => {
-          //   const fetch = getFetch();
-          //   return fetch(input, {
-          //     ...init,
-          //     credentials: "include",
-          //   });
-          // },
+          fetch: async (input, init?) => {
+            const fetch = getFetch();
+            return fetch(input, {
+              ...init,
+              credentials: "include",
+            });
+          },
           transformer: SuperJSON,
         }),
       ],

@@ -1,14 +1,52 @@
-import SuperJSON from "superjson";
-import { Context } from "./context.ts";
+import { ZodError } from "zod";
+import superjson from "superjson";
 import { initTRPC } from "@trpc/server";
+import { db } from "@/server/db/index.ts";
 
-const t = initTRPC.context<Context>().create({
-  transformer: SuperJSON,
+/** Context Creator
+ * This holds all the created procedures and passes along important info such as
+ * database connections and auth info.
+ */
+export const createTRPCContext = async (opts: { headers: Headers }) => {
+  // const session = await getSession();
+  const ctx = {
+    db,
+    session: {
+      user: "testing",
+      email: "test@test.com",
+    },
+    ...opts,
+  };
+
+  return ctx;
+};
+
+/**
+ * Initialize the tRPC API, while specifying a data transformer and error formatting
+ * for type safety in the frontend when validation fails in the backend.
+ */
+const t = initTRPC.context<typeof createTRPCContext>().create({
+  transformer: superjson,
+  errorFormatter({ shape, error }) {
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+        zodError:
+          error.cause instanceof ZodError ? error.cause.flatten() : null,
+      },
+    };
+  },
 });
 
-export const middleware = t.middleware;
+/**
+ * Server side caller
+ */
 export const createCallerFactory = t.createCallerFactory;
-export const mergeRouters = t.mergeRouters;
 
+/**
+ * Exports
+ */
 export const router = t.router;
+export const middleware = t.middleware;
 export const procedure = t.procedure;
