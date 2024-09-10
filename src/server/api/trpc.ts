@@ -2,6 +2,7 @@ import { ZodError } from "zod";
 import superjson from "superjson";
 import { initTRPC } from "@trpc/server";
 import { db } from "@/server/db/index.ts";
+import { getAuthSession } from "../auth";
 
 /** Context Creator
  * This holds all the created procedures and passes along important info such as
@@ -11,10 +12,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
   // const session = await getSession();
   const ctx = {
     db,
-    session: {
-      user: "testing",
-      email: "test@test.com",
-    },
+    session: await getAuthSession(),
     ...opts,
   };
 
