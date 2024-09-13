@@ -1,0 +1,61 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Create terminals",
+      "dependsOn": ["bun", "git"],
+      // Mark as the default build task so cmd/ctrl+shift+b will create them
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      // Try start the task on folder open
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      // The name that shows up in terminal tab
+      "label": "bun",
+      // The task will launch a shell
+      "type": "shell",
+      "command": "",
+      "icon": {
+        "id": "home",
+        "color": "terminal.ansiCyan"
+      },
+      // Set the shell type
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "cmd.exe",
+          "args": ["/k", "cls &&", "bun run dev"]
+        }
+      },
+      // Mark as a background task to avoid the spinner animation on the terminal tab
+      "isBackground": true,
+      "problemMatcher": []
+      // Create the tasks in a terminal group
+    },
+    {
+      "label": "git",
+      "type": "shell",
+      "command": "",
+      "icon": {
+        "id": "git-branch",
+        "color": "terminal.ansiGreen"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/",
+        "shell": {
+          "executable": "cmd.exe",
+          "args": ["/k", "cls &&", "git status"]
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

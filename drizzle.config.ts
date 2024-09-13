@@ -1,6 +1,7 @@
+import { env } from "./src/env";
 import { defineConfig } from "drizzle-kit";
 
-const url = process.env.DATABASE_URL || "bad";
+const url = env.DATABASE_URL;
 
 export default defineConfig({
   dialect: "postgresql",
