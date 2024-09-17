@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { api } from "../../trcp/react.tsx";
-
+import { useState } from 'react';
+import { api } from '@/trcp/react.tsx';
+import '@/styles/test.sass';
 function AddTest() {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const utils = api.useUtils();
 
   const { mutate } = api.hello.addName.useMutation({
     onSuccess: async () => {
       await utils.hello.test.refetch();
-      setName("");
+      setName('');
     },
   });
 
