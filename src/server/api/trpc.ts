@@ -1,8 +1,8 @@
-import { ZodError } from "zod";
-import superjson from "superjson";
-import { initTRPC } from "@trpc/server";
-import { db } from "@/server/db/index.ts";
-import { getAuthSession } from "../auth";
+import { ZodError } from 'zod';
+import superjson from 'superjson';
+import { initTRPC } from '@trpc/server';
+import { db } from '@/server/db/index.ts';
+import { getAuthSession } from '../auth';
 
 /** Context Creator
  * This holds all the created procedures and passes along important info such as
@@ -30,8 +30,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
       ...shape,
       data: {
         ...shape.data,
-        zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
+        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
       },
     };
   },
@@ -40,11 +39,11 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
 /**
  * Server side caller
  */
-export const createCallerFactory = t.createCallerFactory;
+export const { createCallerFactory } = t;
 
 /**
  * Exports
  */
-export const router = t.router;
-export const middleware = t.middleware;
-export const procedure = t.procedure;
+export const { router } = t;
+export const { middleware } = t;
+export const { procedure } = t;

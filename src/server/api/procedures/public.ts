@@ -1,4 +1,4 @@
-import { procedure } from "../trpc.ts";
+import { procedure } from '../trpc.ts';
 
 const publicProcedure = procedure;
 

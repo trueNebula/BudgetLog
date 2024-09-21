@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { api } from '@/trcp/react.tsx';
-import '@/styles/test.sass';
+
 function AddTest() {
   const [name, setName] = useState('');
   const utils = api.useUtils();

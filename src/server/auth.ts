@@ -1,10 +1,12 @@
-import { db } from "./db";
-import { env } from "@/env";
-import { Adapter } from "next-auth/adapters";
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import GoogleProvider from "next-auth/providers/google";
-import { DefaultSession, getServerSession, NextAuthOptions } from "next-auth";
-import { accounts, sessions, users, verificationTokens } from "./db/schema";
+import { db } from './db';
+import { env } from '@/env';
+import { Adapter } from 'next-auth/adapters';
+import { DrizzleAdapter } from '@auth/drizzle-adapter';
+import GoogleProvider from 'next-auth/providers/google';
+import { DefaultSession, getServerSession, NextAuthOptions } from 'next-auth';
+import {
+  accounts, sessions, users, verificationTokens,
+} from './db/schema';
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -12,13 +14,13 @@ import { accounts, sessions, users, verificationTokens } from "./db/schema";
  *
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
-declare module "next-auth" {
+declare module 'next-auth' {
   interface Session extends DefaultSession {
     user: {
       id: string;
       // ...other properties
       // role: UserRole;
-    } & DefaultSession["user"];
+    } & DefaultSession['user'];
   }
 
   // interface User {
@@ -34,8 +36,8 @@ export const authOptions: NextAuthOptions = {
       user: {
         ...session.user,
         id: user.id,
-      }
-    })
+      },
+    }),
   },
   adapter: DrizzleAdapter(db, {
     usersTable: users,
@@ -47,8 +49,8 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
-    })
+    }),
   ],
-}
+};
 
 export const getAuthSession = () => getServerSession(authOptions);

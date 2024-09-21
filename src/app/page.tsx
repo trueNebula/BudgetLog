@@ -1,8 +1,9 @@
 import React from 'react';
-import { api } from '../trcp/server.ts';
-import AddTest from './components/addTest.tsx';
-import { getAuthSession } from '@/server/auth.ts';
 import Link from 'next/link';
+import { api } from '../trcp/server.ts';
+import AddTest from './components/main/addTest.tsx';
+import { getAuthSession } from '@/server/auth.ts';
+import GoToDashboardButton from './components/main/goToDashboardButton.tsx';
 
 export default async function Home() {
   const { greeting: dataPossiblyUndefined } = await api.hello.talk({
@@ -17,7 +18,10 @@ export default async function Home() {
         Hello! {dataPossiblyUndefined}
         {session && session.user.name}
         {session ? (
-          <Link href="/api/auth/signout">Sign Out</Link>
+          <>
+            <GoToDashboardButton session={session} />
+            <Link href="/api/auth/signout">Sign Out</Link>
+          </>
         ) : (
           <Link href="/api/auth/signin">Sign In</Link>
         )}

@@ -1,8 +1,8 @@
-import { z } from "zod";
-import { router } from "../trpc.ts";
-import { test } from "@/server/db/schema.ts";
-import publicProcedure from "../procedures/public.ts";
-import authProcedure from "../procedures/auth.ts";
+import { z } from 'zod';
+import { router } from '../trpc.ts';
+import { test } from '@/server/db/schema.ts';
+import publicProcedure from '../procedures/public.ts';
+import authProcedure from '../procedures/auth.ts';
 
 export const helloRouter = router({
   talk: publicProcedure
@@ -29,8 +29,8 @@ export const helloRouter = router({
     }),
 
   secret: authProcedure.query(() => ({
-    text: 'hiiiiii secwet uwu'
-  }))
+    text: 'hiiiiii secwet uwu',
+  })),
 });
 
 export const appRouter = router({

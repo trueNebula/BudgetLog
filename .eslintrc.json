@@ -6,8 +6,21 @@
   ],
   "rules": {
     "import/no-unresolved": 0,
-    "react/jsx-filename-extension": {
-      "extensions": [".jsx", ".tsx"]
-    }
+    "react/jsx-filename-extension": 0,
+    "import/extensions": 0,
+    "import/prefer-default-export": 0,
+    "import/order": 0,
+    "react/react-in-jsx-scope": 0,
+    "operator-linebreak": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "arrow-body-style": 0,
+    "implicit-arrow-linebreak": 0,
+    "function-paren-newline": 0
+  },
+  "env": {
+    "es2024": true
+  },
+  "globals": {
+    "React": true
   }
 }
