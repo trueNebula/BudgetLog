@@ -28,7 +28,9 @@ function AddTest() {
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter a new name"
         />
-        <button onClick={handleAddName}>Add</button>
+        <button onClick={handleAddName} type="button">
+          Add
+        </button>
       </div>
       {data &&
         data.map((result) => (

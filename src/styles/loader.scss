@@ -1,0 +1,92 @@
+@keyframes loader-inner {
+  0% { transform: rotate(0deg) }
+  50% { transform: rotate(180deg) }
+  100% { transform: rotate(360deg) }
+}
+
+.loader-inner div {
+  position: absolute;
+  animation: loader-inner 0.75s linear infinite;
+  width: 32px;
+  height: 32px;
+  top: 16px;
+  left: 16px;
+  border-radius: 50%;
+  box-shadow: 0 2px 0 0 var(--foreground);
+}
+
+.loader {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+
+.loader-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; 
+}
+
+.loader-inner div { box-sizing: content-box; }
+
+@keyframes altloader-inner {
+  0% { transform: rotate(0) }
+  100% { transform: rotate(360deg) }
+}
+.altloader-inner div { box-sizing: border-box!important }
+.altloader-inner > div {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  top: 14px;
+  left: 14px;
+  border-radius: 50%;
+  border: 8px solid #000;
+  border-color: var(--foreground) transparent var(--foreground) transparent;
+  animation: altloader-inner 1s linear infinite;
+}
+.altloader-inner > div:nth-child(2) { border-color: transparent }
+.altloader-inner > div:nth-child(2) div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.altloader-inner > div:nth-child(2) div:before, .altloader-inner > div:nth-child(2) div:after { 
+  content: "";
+  display: block;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: -8px;
+  left: 24px;
+  background: #1a1818;
+  border-radius: 50%;
+  box-shadow: 0 64px 0 0 #1a1818;
+}
+.altloader-inner > div:nth-child(2) div:after { 
+  left: -8px;
+  top: 24px;
+  box-shadow: 64px 0 0 0 var(--foreground);
+}
+.altloader {
+  width: 45px;
+  height: 45px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+.altloader-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(0.45);
+  backface-visibility: hidden;
+  transform-origin: 0 0; 
+}
+.altloader-inner div { box-sizing: content-box; }

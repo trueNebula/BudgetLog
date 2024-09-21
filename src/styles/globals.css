@@ -26,16 +26,12 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fcfcfc;
+  --foreground: #1a1818;
+  --primary: #efedde;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #fcfcfc;
-    --foreground: #1a1818;
-    --primary: #efedde;
-  }
 }
 
 body {

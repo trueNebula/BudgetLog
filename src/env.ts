@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 type TEnvSchema = {
-  [key: string]: z.ZodType
-}
+  [key: string]: z.ZodType;
+};
 
 type TEnv = {
   NODE_ENV: string;
@@ -16,9 +16,9 @@ type TEnv = {
   NEXTAUTH_URL: string;
 };
 
-function validateEnv(env: { server: TEnvSchema, client: TEnvSchema }) {
-  const server: TEnvSchema = env.server;
-  const client: TEnvSchema = env.client;
+function validateEnv(env: { server: TEnvSchema; client: TEnvSchema }) {
+  const { server } = env;
+  const { client } = env;
   const exposedVars = {} as TEnv;
 
   const serverVars = Object.keys(server);
@@ -41,13 +41,12 @@ function validateEnv(env: { server: TEnvSchema, client: TEnvSchema }) {
 
       if (zodSchema.safeParse(value).success === false) {
         throw new Error(
-          `Invalid environment variable "${key}": ${value} does not match ${zodSchema.description}`
+          `Invalid environment variable "${key}": ${value} does not match ${zodSchema.description}`,
         );
       }
 
       exposedVars[key as keyof TEnv] = value;
     });
-
   } else {
     clientVars.forEach((key) => {
       const zodSchema = client[key];
@@ -59,7 +58,7 @@ function validateEnv(env: { server: TEnvSchema, client: TEnvSchema }) {
 
       if (zodSchema.safeParse(value).success === false) {
         throw new Error(
-          `Invalid environment variable "${key}": ${value} does not match ${zodSchema.description}`
+          `Invalid environment variable "${key}": ${value} does not match ${zodSchema.description}`,
         );
       }
 
@@ -72,7 +71,7 @@ function validateEnv(env: { server: TEnvSchema, client: TEnvSchema }) {
 
 export const env = validateEnv({
   server: {
-    NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+    NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
 
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
@@ -82,7 +81,7 @@ export const env = validateEnv({
     NEXTAUTH_SECRET: z.string(),
     NEXTAUTH_URL: z.preprocess(
       (str) => process.env.VERCEL_URL ?? str,
-      process.env.VERCEL ? z.string() : z.string().url()
+      process.env.VERCEL ? z.string() : z.string().url(),
     ),
   },
   client: {},

@@ -1,8 +1,9 @@
 'use client';
 
-import Navbar from '@/app/components/navbar/navbar';
-import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
+import Loader from '@/app/components/loader';
+import { useSession } from 'next-auth/react';
+import Navbar from '@/app/components/navbar/navbar';
 
 export default function Dashboard() {
   const session = useSession();
@@ -16,7 +17,11 @@ export default function Dashboard() {
   }
 
   if (session.status === 'loading') {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen w-full flex justify-center items-center">
+        <Loader />
+      </div>
+    );
   }
 
   return (
