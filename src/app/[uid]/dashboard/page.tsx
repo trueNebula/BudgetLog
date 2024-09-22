@@ -6,22 +6,20 @@ import { useSession } from 'next-auth/react';
 import Navbar from '@/app/components/navbar/navbar';
 
 export default function Dashboard() {
-  const session = useSession();
+  const { data, status } = useSession();
   const { uid } = useParams();
+  console.log(data, status);
 
-  if (
-    !session ||
-    (session.status !== 'loading' && session.data?.user.id !== uid)
-  ) {
-    return <div>Unauthorized</div>;
-  }
-
-  if (session.status === 'loading') {
+  if (status === 'loading') {
     return (
       <div className="min-h-screen w-full flex justify-center items-center">
         <Loader />
       </div>
     );
+  }
+
+  if (data === null || (status === 'authenticated' && data?.user.id !== uid)) {
+    return <div>Unauthorized</div>;
   }
 
   return (
