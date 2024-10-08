@@ -11,7 +11,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-const createTable = pgTableCreator((name) => `buget-log_${name}`);
+const createTable = pgTableCreator((name) => `budgetlog_${name}`);
 
 export const test = createTable('test', {
   id: serial('id').primaryKey(),
