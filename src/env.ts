@@ -40,7 +40,6 @@ function validateEnv(env: { server: TEnvSchema; client: TEnvSchema }) {
       }
 
       if (zodSchema.safeParse(value).success === false) {
-        console.log(zodSchema.safeParse(value).error);
         throw new Error(
           `Invalid environment variable "${key}": ${value} does not match ${zodSchema.description}`,
         );

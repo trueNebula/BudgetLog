@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${exo2.className} antialiased`}>
+      <body className={`${exo2.className} antialiased bg-background`}>
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>

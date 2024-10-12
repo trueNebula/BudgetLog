@@ -4,13 +4,14 @@ import { useParams } from 'next/navigation';
 import Loader from '@/app/components/loader';
 import { useSession } from 'next-auth/react';
 import Navbar from '@/app/components/navbar/navbar';
+import DashboardContainer from '../../components/dashboard/dashboardContainer.tsx';
 
 export default function Dashboard() {
   const { data, status } = useSession();
   const { uid } = useParams();
-  console.log(data, status);
+  // console.log(data, status);
 
-  if (status === 'loading') {
+  if (status === 'loading' || !data?.user.name || !data?.user.image) {
     return (
       <div className="min-h-screen w-full flex justify-center items-center">
         <Loader />
@@ -22,10 +23,18 @@ export default function Dashboard() {
     return <div>Unauthorized</div>;
   }
 
+  const loggedUser = {
+    id: data.user.id,
+    name: data.user.name,
+    image: data.user.image,
+  };
+
   return (
     <div className="min-h-screen w-full flex justify-between">
-      <Navbar />
-      <main className="bg-red-500 min-h-screen grow">lol</main>
+      <Navbar user={loggedUser} />
+      <main className="min-h-screen grow">
+        <DashboardContainer />
+      </main>
     </div>
   );
 }
