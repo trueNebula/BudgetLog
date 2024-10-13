@@ -26,16 +26,52 @@
   justify-content: center;
   align-items: center;
   box-shadow: 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.1);
+  z-index: 1 !important;
+  user-select: auto !important;
 }
 
 .clicking {
-  user-select: none;
-  // z-index: 10 !important;
+  user-select: none !important;
+  z-index: 3 !important;
   // background-color: red;
-  box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.1);
 }
 
 .blur {
   filter: blur(5px);
-  // z-index: -10 !important;
+  z-index: -10 !important;
+}
+
+.section-toggle {
+  user-select: none;
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  input[type='checkbox']:checked + label .unchecked {
+    display: inline-block;
+  }
+
+  input[type='checkbox']:checked + label .checked {
+    display: none;
+  }
+
+  input[type='checkbox']:not(:checked) + label .checked {
+    display: inline-block;
+  }
+
+  input[type='checkbox']:not(:checked) + label .unchecked {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+  }
+}
+
+.section-toggle:hover {
+  label {
+    color: var(--secondary);
+  }
 }

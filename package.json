@@ -32,7 +32,8 @@
     "swapy": "^0.4.2",
     "vite": "^5.4.8",
     "yarn": "^1.22.22",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
     "@types/node": "^20.16.11",

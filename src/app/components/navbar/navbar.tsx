@@ -1,42 +1,87 @@
 import React from 'react';
 import Link from 'next/link';
+import { useShallow } from 'zustand/react/shallow';
 import { House, SignOut } from '@phosphor-icons/react';
 import Header from '@/app/components/navbar/header.tsx';
+import { useDashboardStore } from '@/app/stores/useDashboardStore.ts';
+import LockLayout from '@/app/components/navbar/lockLayoutCheckbox.tsx';
+import VisibilityCheckbox from '@/app/components/navbar/visibilityCheckbox.tsx';
 
 export default function Navbar({ user }: { user: { id: string; name: string; image: string } }) {
+  const {
+    isBalancesVisible,
+    isIncomeStreamsVisible,
+    isExpensesVisible,
+    isInvestmentsVisible,
+    isSavingsVisible,
+    isTipsVisible,
+  } = useDashboardStore(
+    useShallow((state) => ({
+      isBalancesVisible: state.isBalancesVisible,
+      isIncomeStreamsVisible: state.isIncomeStreamsVisible,
+      isExpensesVisible: state.isExpensesVisible,
+      isInvestmentsVisible: state.isInvestmentsVisible,
+      isSavingsVisible: state.isSavingsVisible,
+      isTipsVisible: state.isTipsVisible,
+    })),
+  );
+  const {
+    toggleBalancesVisible,
+    toggleIncomeStreamsVisible,
+    toggleExpensesVisible,
+    toggleInvestmentsVisible,
+    toggleSavingsVisible,
+    toggleTipsVisible,
+  } = useDashboardStore(
+    useShallow((state) => ({
+      toggleBalancesVisible: state.toggleBalancesVisible,
+      toggleIncomeStreamsVisible: state.toggleIncomeStreamsVisible,
+      toggleExpensesVisible: state.toggleExpensesVisible,
+      toggleInvestmentsVisible: state.toggleInvestmentsVisible,
+      toggleSavingsVisible: state.toggleSavingsVisible,
+      toggleTipsVisible: state.toggleTipsVisible,
+    })),
+  );
+
   return (
     <nav className="bg-primary text-lg grow max-w-80 flex flex-col items-start justify-between px-4 py-8">
       <div className="flex flex-col items-start gap-8 w-full">
         <Header name={user.name} image={user.image} />
         <span className="w-full h-[2px] bg-zinc-500 rounded-full" />
-        {/* TODO: Turn this into its own component */}
-        <div className="flex flex-col gap-2">
-          <div>Toggle Sections</div>
-          <div className="section-toggle ml-8">
-            <input type="checkbox" id="toggle" className="mr-2" />
-            <span>Balances</span>
-          </div>
-          <div className="section-toggle ml-8">
-            <input type="checkbox" id="toggle" className="mr-2" />
-            <span>Income Streams</span>
-          </div>
-          <div className="section-toggle ml-8">
-            <input type="checkbox" id="toggle" className="mr-2" />
-            <span>Expenses</span>
-          </div>
-          <div className="section-toggle ml-8">
-            <input type="checkbox" id="toggle" className="mr-2" />
-            <span>Investments</span>
-          </div>
-          <div className="section-toggle ml-8">
-            <input type="checkbox" id="toggle" className="mr-2" />
-            <span>Savings</span>
-          </div>
-          <div className="section-toggle ml-8">
-            <input type="checkbox" id="toggle" className="mr-2" />
-            <span>Tips</span>
-          </div>
+        <div className="flex flex-col gap-4">
+          <div className="text-2xl font-bold">Toggle Sections</div>
+          <VisibilityCheckbox
+            title="Balances"
+            defaultChecked={isBalancesVisible}
+            changeHandler={toggleBalancesVisible}
+          />
+          <VisibilityCheckbox
+            title="Tips"
+            defaultChecked={isTipsVisible}
+            changeHandler={toggleTipsVisible}
+          />
+          <VisibilityCheckbox
+            title="Income Streams"
+            defaultChecked={isIncomeStreamsVisible}
+            changeHandler={toggleIncomeStreamsVisible}
+          />
+          <VisibilityCheckbox
+            title="Expenses"
+            defaultChecked={isExpensesVisible}
+            changeHandler={toggleExpensesVisible}
+          />
+          <VisibilityCheckbox
+            title="Investments"
+            defaultChecked={isInvestmentsVisible}
+            changeHandler={toggleInvestmentsVisible}
+          />
+          <VisibilityCheckbox
+            title="Savings"
+            defaultChecked={isSavingsVisible}
+            changeHandler={toggleSavingsVisible}
+          />
         </div>
+        <LockLayout />
       </div>
       <div className="flex justify-between items-center gap-8 w-full">
         <Link href="/" className="flex items-center gap-2">

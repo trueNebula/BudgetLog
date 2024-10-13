@@ -29,6 +29,7 @@
   --background: #fcfcfc;
   --foreground: #1a1818;
   --primary: #efedde;
+  --secondary: #787575;
 }
 
 @media (prefers-color-scheme: dark) {
