@@ -2,12 +2,16 @@ import React from 'react';
 import Link from 'next/link';
 import { useShallow } from 'zustand/react/shallow';
 import { House, SignOut } from '@phosphor-icons/react';
-import Header from '@/app/components/navbar/header.tsx';
+import Header from '@/app/dashboard/_components/navbar/header';
 import { useDashboardStore } from '@/app/stores/useDashboardStore.ts';
-import LockLayout from '@/app/components/navbar/lockLayoutCheckbox.tsx';
-import VisibilityCheckbox from '@/app/components/navbar/visibilityCheckbox.tsx';
+import LockLayout from '@/app/dashboard/_components/navbar/lockLayoutCheckbox';
+import VisibilityCheckbox from '@/app/dashboard/_components/navbar/visibilityCheckbox';
 
-export default function Navbar({ user }: { user: { id: string; name: string; image: string } }) {
+export default function Navbar({
+  user,
+}: {
+  user: { id: string; name: string; image: string };
+}) {
   const {
     isBalancesVisible,
     isIncomeStreamsVisible,
@@ -23,7 +27,7 @@ export default function Navbar({ user }: { user: { id: string; name: string; ima
       isInvestmentsVisible: state.isInvestmentsVisible,
       isSavingsVisible: state.isSavingsVisible,
       isTipsVisible: state.isTipsVisible,
-    })),
+    }))
   );
   const {
     toggleBalancesVisible,
@@ -40,7 +44,7 @@ export default function Navbar({ user }: { user: { id: string; name: string; ima
       toggleInvestmentsVisible: state.toggleInvestmentsVisible,
       toggleSavingsVisible: state.toggleSavingsVisible,
       toggleTipsVisible: state.toggleTipsVisible,
-    })),
+    }))
   );
 
   return (

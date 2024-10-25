@@ -33,6 +33,7 @@ const saveState = (state: IDashboardStore) => {
 };
 
 const getState = (state: string): boolean => {
+  if (typeof window === 'undefined') return true;
   const savedState = localStorage.getItem('dashboardPrefs');
   if (!savedState) {
     return true;

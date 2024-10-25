@@ -1,10 +1,8 @@
-'use client';
-
 import { useParams } from 'next/navigation';
-import Loader from '@/app/components/loader';
+import Loader from '@/components/loader.tsx';
 import { useSession } from 'next-auth/react';
-import Navbar from '@/app/components/navbar/navbar';
-import DashboardContainer from '../../components/dashboard/dashboardContainer.tsx';
+import Navbar from '@/app/dashboard/_components/navbar/navbar';
+import DashboardContainer from '@/app/dashboard/_components/dashboard/dashboardContainer';
 
 export default function Dashboard() {
   const { data, status } = useSession();

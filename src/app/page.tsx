@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { api } from '../trcp/server.ts';
-import AddTest from './components/main/addTest.tsx';
+import AddTest from '../components/main/addTest.tsx';
 import { getAuthSession } from '@/server/auth.ts';
-import GoToDashboardButton from './components/main/goToDashboardButton.tsx';
+import GoToDashboardButton from '../components/main/goToDashboardButton.tsx';
 
 export default async function Home() {
   const { greeting: dataPossiblyUndefined } = await api.hello.talk({

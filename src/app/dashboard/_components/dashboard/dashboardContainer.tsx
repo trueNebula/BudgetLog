@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { createSwapy, Swapy } from 'swapy';
-import Tips from '@/app/components/dashboard/tips.tsx';
-import Incomes from '@/app/components/dashboard/incomes.tsx';
-import Savings from '@/app/components/dashboard/savings.tsx';
-import Balances from '@/app/components/dashboard/balances.tsx';
-import Expenses from '@/app/components/dashboard/expenses.tsx';
-import Investments from '@/app/components/dashboard/investments.tsx';
+import Tips from '@/app/dashboard/_components/dashboard/tips';
+import Incomes from '@/app/dashboard/_components/dashboard/incomes';
+import Savings from '@/app/dashboard/_components/dashboard/savings';
+import Balances from '@/app/dashboard/_components/dashboard/balances';
+import Expenses from '@/app/dashboard/_components/dashboard/expenses';
+import Investments from '@/app/dashboard/_components/dashboard/investments';
 import { useDashboardStore } from '@/app/stores/useDashboardStore.ts';
 import '@/styles/dashboard.scss';
 
@@ -72,10 +72,15 @@ export default function DashboardContainer() {
 
     swapy.onSwapStart(() => {
       slots.forEach((slot) => {
-        slot.classList.add('border-4', 'border-dashed', 'border-gray-400', 'rounded-lg');
+        slot.classList.add(
+          'border-4',
+          'border-dashed',
+          'border-gray-400',
+          'rounded-lg'
+        );
       });
       const inactiveItems = Array.from(items).filter(
-        (item) => !item.classList.contains('clicking'),
+        (item) => !item.classList.contains('clicking')
       );
       inactiveItems.forEach((item) => {
         item.classList.add('blur');
@@ -84,7 +89,12 @@ export default function DashboardContainer() {
 
     swapy.onSwapEnd(() => {
       slots.forEach((slot) => {
-        slot.classList.remove('border-4', 'border-dashed', 'border-gray-400', 'rounded-lg');
+        slot.classList.remove(
+          'border-4',
+          'border-dashed',
+          'border-gray-400',
+          'rounded-lg'
+        );
       });
       items.forEach((item) => {
         item.classList.remove('clicking', 'blur');
@@ -126,7 +136,10 @@ export default function DashboardContainer() {
         const item = items[i];
         const itemHandlers = handlers.get(item);
         if (itemHandlers) {
-          item.removeEventListener('mousedown', itemHandlers.handleMouseDownBound);
+          item.removeEventListener(
+            'mousedown',
+            itemHandlers.handleMouseDownBound
+          );
           item.removeEventListener('mouseup', itemHandlers.handleMouseUpBound);
         }
       }
