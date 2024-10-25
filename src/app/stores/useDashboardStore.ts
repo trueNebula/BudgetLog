@@ -1,3 +1,4 @@
+import { getFromLocalStorage } from '@/lib/utils';
 import { create } from 'zustand';
 
 interface IDashboardStore {
@@ -33,8 +34,7 @@ const saveState = (state: IDashboardStore) => {
 };
 
 const getState = (state: string): boolean => {
-  if (typeof window === 'undefined') return true;
-  const savedState = localStorage.getItem('dashboardPrefs');
+  const savedState = getFromLocalStorage(state);
   if (!savedState) {
     return true;
   }

@@ -19,7 +19,7 @@ export default async function Home() {
         {session && session.user.name}
         {session ? (
           <>
-            <GoToDashboardButton session={session} />
+            <GoToDashboardButton />
             <Link href="/api/auth/signout">Sign Out</Link>
           </>
         ) : (

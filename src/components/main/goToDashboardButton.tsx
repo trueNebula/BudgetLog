@@ -1,16 +1,12 @@
 'use client';
 
-import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
 
-function GoToDashboardButton({ session }: { session: Session }) {
+function GoToDashboardButton() {
   const router = useRouter();
 
   return (
-    <button
-      onClick={() => router.push(`/${session.user.id}/dashboard`)}
-      type="button"
-    >
+    <button onClick={() => router.push('/dashboard')} type="button">
       Go to dashboard
     </button>
   );

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import { createSwapy, Swapy } from 'swapy';
 import Tips from '@/app/dashboard/_components/dashboard/tips';
@@ -8,6 +10,7 @@ import Expenses from '@/app/dashboard/_components/dashboard/expenses';
 import Investments from '@/app/dashboard/_components/dashboard/investments';
 import { useDashboardStore } from '@/app/stores/useDashboardStore.ts';
 import '@/styles/dashboard.scss';
+import { getFromLocalStorage } from '@/lib/utils';
 
 const DEFAULT_LAYOUT = {
   1: 'a',
@@ -38,7 +41,7 @@ const getItemBySlot = (slot: string) => {
 };
 
 export default function DashboardContainer() {
-  const localStorageLayout = useRef<string>(localStorage.getItem('layout'));
+  const localStorageLayout = useRef<string>(getFromLocalStorage('layout'));
   const slotItems: Record<string, string> = localStorageLayout.current
     ? JSON.parse(localStorageLayout.current)
     : DEFAULT_LAYOUT;
@@ -72,15 +75,10 @@ export default function DashboardContainer() {
 
     swapy.onSwapStart(() => {
       slots.forEach((slot) => {
-        slot.classList.add(
-          'border-4',
-          'border-dashed',
-          'border-gray-400',
-          'rounded-lg'
-        );
+        slot.classList.add('border-4', 'border-dashed', 'border-gray-400', 'rounded-lg');
       });
       const inactiveItems = Array.from(items).filter(
-        (item) => !item.classList.contains('clicking')
+        (item) => !item.classList.contains('clicking'),
       );
       inactiveItems.forEach((item) => {
         item.classList.add('blur');
@@ -89,12 +87,7 @@ export default function DashboardContainer() {
 
     swapy.onSwapEnd(() => {
       slots.forEach((slot) => {
-        slot.classList.remove(
-          'border-4',
-          'border-dashed',
-          'border-gray-400',
-          'rounded-lg'
-        );
+        slot.classList.remove('border-4', 'border-dashed', 'border-gray-400', 'rounded-lg');
       });
       items.forEach((item) => {
         item.classList.remove('clicking', 'blur');
@@ -136,10 +129,7 @@ export default function DashboardContainer() {
         const item = items[i];
         const itemHandlers = handlers.get(item);
         if (itemHandlers) {
-          item.removeEventListener(
-            'mousedown',
-            itemHandlers.handleMouseDownBound
-          );
+          item.removeEventListener('mousedown', itemHandlers.handleMouseDownBound);
           item.removeEventListener('mouseup', itemHandlers.handleMouseUpBound);
         }
       }

@@ -1,30 +1,28 @@
-import { useParams } from 'next/navigation';
+import { getAuthSession } from '@/server/auth';
 import Loader from '@/components/loader.tsx';
-import { useSession } from 'next-auth/react';
 import Navbar from '@/app/dashboard/_components/navbar/navbar';
 import DashboardContainer from '@/app/dashboard/_components/dashboard/dashboardContainer';
 
-export default function Dashboard() {
-  const { data, status } = useSession();
-  const { uid } = useParams();
+export default async function Dashboard() {
+  const session = await getAuthSession();
   // console.log(data, status);
 
-  if (status === 'loading' || !data?.user.name || !data?.user.image) {
-    return (
-      <div className="min-h-screen w-full flex justify-center items-center">
-        <Loader />
-      </div>
-    );
-  }
+  // if (status === 'loading' || !data?.user.name || !data?.user.image) {
+  //   return (
+  //     <div className="min-h-screen w-full flex justify-center items-center">
+  //       <Loader />
+  //     </div>
+  //   );
+  // }
 
-  if (data === null || (status === 'authenticated' && data?.user.id !== uid)) {
+  if (!session || !session.user) {
     return <div>Unauthorized</div>;
   }
 
   const loggedUser = {
-    id: data.user.id,
-    name: data.user.name,
-    image: data.user.image,
+    id: session.user.id,
+    name: session.user.name,
+    image: session.user.image,
   };
 
   return (
