@@ -139,7 +139,7 @@ export default function DashboardContainer() {
   return (
     <div className="container flex flex-col gap-[5vh] h-full justify-center items-center min-w-full overflow-hidden">
       <div className="row">
-        <div className="slot grow" data-swapy-slot="1">
+        <div className="slot grow max-w-[calc(100%-22vh-2.5vw)]" data-swapy-slot="1">
           {getItemBySlot(slotItems['1'])}
         </div>
         <div className="slot h-full aspect-square" data-swapy-slot="2">

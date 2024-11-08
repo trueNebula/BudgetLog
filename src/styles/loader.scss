@@ -12,7 +12,7 @@
   top: 16px;
   left: 16px;
   border-radius: 50%;
-  box-shadow: 0 2px 0 0 var(--foreground);
+  box-shadow: 0 2px 0 0 hsl(var(--foreground));
 }
 
 .loader {
@@ -47,7 +47,7 @@
   left: 14px;
   border-radius: 50%;
   border: 8px solid #000;
-  border-color: var(--foreground) transparent var(--foreground) transparent;
+  border-color: hsl(var(--foreground)) transparent hsl(var(--foreground)) transparent;
   animation: altloader-inner 1s linear infinite;
 }
 .altloader-inner > div:nth-child(2) { border-color: transparent }
@@ -72,7 +72,7 @@
 .altloader-inner > div:nth-child(2) div:after { 
   left: -8px;
   top: 24px;
-  box-shadow: 64px 0 0 0 var(--foreground);
+  box-shadow: 64px 0 0 0 hsl(var(--foreground));
 }
 .altloader {
   width: 45px;
