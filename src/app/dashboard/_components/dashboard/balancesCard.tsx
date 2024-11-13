@@ -6,6 +6,7 @@ import {
 } from '@/components/ui/card';
 import { api } from '@/trcp/react.tsx';
 import Loader from '@/components/loader.tsx';
+import SlotCounter from 'react-slot-counter';
 
 type Balance = {
   id: string;
@@ -29,15 +30,17 @@ export default function Balances() {
   const renderBalances = () => {
     if (balances && balances.length) {
       return balances.map((balance) => (
-        <Card key={balance?.id} className="min-w-52">
+        <Card key={balance?.id} className="min-w-52 h-full">
           <CardHeader>
             <CardTitle>{balance.name}</CardTitle>
           </CardHeader>
-          <CardContent>
-            <span className="text-lg font-semibold">{balance.currency}</span>
-            <span>{balance?.amount}</span>
+          <CardContent className="mt-2 flex justify-start items-center gap-1">
+            <span className="min-h-full">{balance.currency}</span>
+            <span className="-translate-y-[2px]">
+              <SlotCounter value={balance?.amount} />
+            </span>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="mt-2">
             <p className="text-xs">Last updated: 10 minutes ago</p>
           </CardFooter>
         </Card>
@@ -45,7 +48,7 @@ export default function Balances() {
     }
 
     return (
-      <Card className="w-52">
+      <Card className="w-52 h-full">
         <CardHeader>
           <CardTitle>No Balances Found!</CardTitle>
         </CardHeader>

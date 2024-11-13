@@ -5,7 +5,7 @@ import { createSwapy, Swapy } from 'swapy';
 import Tips from '@/app/dashboard/_components/dashboard/tips';
 import Incomes from '@/app/dashboard/_components/dashboard/incomes';
 import Savings from '@/app/dashboard/_components/dashboard/savings';
-import Balances from '@/app/dashboard/_components/dashboard/balances';
+import Balances from '@/app/dashboard/_components/dashboard/balancesCard';
 import Expenses from '@/app/dashboard/_components/dashboard/expenses';
 import Investments from '@/app/dashboard/_components/dashboard/investments';
 import { useDashboardStore } from '@/app/stores/useDashboardStore.ts';
@@ -137,9 +137,9 @@ export default function DashboardContainer() {
   }, [isLayoutLocked]);
 
   return (
-    <div className="container flex flex-col gap-[5vh] h-full justify-center items-center min-w-full overflow-hidden">
+    <div className="container flex flex-col gap-[2.5vh] h-full justify-center items-center min-w-full overflow-hidden">
       <div className="row">
-        <div className="slot grow max-w-[calc(100%-22vh-2.5vw)]" data-swapy-slot="1">
+        <div className="slot grow max-w-[calc(100%-24vh-1.25vw)]" data-swapy-slot="1">
           {getItemBySlot(slotItems['1'])}
         </div>
         <div className="slot h-full aspect-square" data-swapy-slot="2">

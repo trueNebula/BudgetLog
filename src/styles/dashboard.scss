@@ -2,18 +2,18 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 0 2.5vw;
-  gap: 2.5vw;
+  padding: 0 1.25vw;
+  gap: 1.25vw;
 }
 
 .row {
   @extend %row;
-  height: 22vh;
+  height: 24vh;
 }
 
 .row-tall {
   @extend %row;
-  height: 35.2vh;
+  height: 42.4vh;
 }
 
 .item {

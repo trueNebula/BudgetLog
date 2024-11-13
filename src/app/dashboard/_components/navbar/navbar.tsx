@@ -8,6 +8,12 @@ import Header from '@/app/dashboard/_components/navbar/header';
 import { useDashboardStore } from '@/app/stores/useDashboardStore.ts';
 import LockLayout from '@/app/dashboard/_components/navbar/lockLayoutCheckbox';
 import VisibilityCheckbox from '@/app/dashboard/_components/navbar/visibilityCheckbox';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion.tsx';
 
 export default function Navbar({ user }: { user: { id: string; name: string; image: string } }) {
   const {
@@ -47,42 +53,46 @@ export default function Navbar({ user }: { user: { id: string; name: string; ima
 
   return (
     <nav className="bg-primary text-lg grow max-w-80 flex flex-col items-start justify-between px-4 py-8">
-      <div className="flex flex-col items-start gap-8 w-full">
+      <div className="flex flex-col items-start gap-2 w-full">
         <Header name={user.name} image={user.image} />
-        <span className="w-full h-[2px] bg-zinc-500 rounded-full" />
-        <div className="flex flex-col gap-4">
-          <div className="text-2xl font-bold">Toggle Sections</div>
-          <VisibilityCheckbox
-            title="Balances"
-            defaultChecked={isBalancesVisible}
-            changeHandler={toggleBalancesVisible}
-          />
-          <VisibilityCheckbox
-            title="Tips"
-            defaultChecked={isTipsVisible}
-            changeHandler={toggleTipsVisible}
-          />
-          <VisibilityCheckbox
-            title="Income Streams"
-            defaultChecked={isIncomeStreamsVisible}
-            changeHandler={toggleIncomeStreamsVisible}
-          />
-          <VisibilityCheckbox
-            title="Expenses"
-            defaultChecked={isExpensesVisible}
-            changeHandler={toggleExpensesVisible}
-          />
-          <VisibilityCheckbox
-            title="Investments"
-            defaultChecked={isInvestmentsVisible}
-            changeHandler={toggleInvestmentsVisible}
-          />
-          <VisibilityCheckbox
-            title="Savings"
-            defaultChecked={isSavingsVisible}
-            changeHandler={toggleSavingsVisible}
-          />
-        </div>
+        <span className="w-full h-[2px] bg-zinc-500 rounded-full mt-2" />
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="toggles">
+            <AccordionTrigger>Toggle Sections</AccordionTrigger>
+            <AccordionContent>
+              <VisibilityCheckbox
+                title="Balances"
+                defaultChecked={isBalancesVisible}
+                changeHandler={toggleBalancesVisible}
+              />
+              <VisibilityCheckbox
+                title="Tips"
+                defaultChecked={isTipsVisible}
+                changeHandler={toggleTipsVisible}
+              />
+              <VisibilityCheckbox
+                title="Income Streams"
+                defaultChecked={isIncomeStreamsVisible}
+                changeHandler={toggleIncomeStreamsVisible}
+              />
+              <VisibilityCheckbox
+                title="Expenses"
+                defaultChecked={isExpensesVisible}
+                changeHandler={toggleExpensesVisible}
+              />
+              <VisibilityCheckbox
+                title="Investments"
+                defaultChecked={isInvestmentsVisible}
+                changeHandler={toggleInvestmentsVisible}
+              />
+              <VisibilityCheckbox
+                title="Savings"
+                defaultChecked={isSavingsVisible}
+                changeHandler={toggleSavingsVisible}
+              />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
         <LockLayout />
       </div>
       <div className="flex justify-between items-center gap-8 w-full">
