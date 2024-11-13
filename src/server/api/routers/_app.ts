@@ -3,6 +3,7 @@ import { router } from '../trpc.ts';
 import { test } from '@/server/db/schema.ts';
 import publicProcedure from '../procedures/public.ts';
 import authProcedure from '../procedures/auth.ts';
+import { balancesRouter } from '@/server/api/routers/balances.ts';
 
 export const helloRouter = router({
   talk: publicProcedure
@@ -35,6 +36,7 @@ export const helloRouter = router({
 
 export const appRouter = router({
   hello: helloRouter,
+  balances: balancesRouter,
 });
 
 export type AppRouter = typeof appRouter;

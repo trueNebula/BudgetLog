@@ -1,12 +1,19 @@
 {
-  "version": "7",
+  "version": "1",
   "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "7",
+      "version": "1",
       "when": 1728391646675,
       "tag": "0000_init_db",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "1",
+      "when": 1731512808798,
+      "tag": "0001_add-balances",
       "breakpoints": true
     }
   ]

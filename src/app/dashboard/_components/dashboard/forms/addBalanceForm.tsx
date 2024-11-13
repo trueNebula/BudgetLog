@@ -14,30 +14,48 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
+import { api } from '@/trcp/react.tsx';
 
 const balanceSchema = z.object({
   name: z.string().min(1, 'Required'),
-  value: z.number(),
+  amount: z.number(),
   currency: z.string().min(1, 'Required'),
 });
 
-export default function AddBalanceForm() {
+export default function AddBalanceForm({
+  submitCallback,
+  doneCallback,
+  loading,
+}: {
+  submitCallback: () => void;
+  doneCallback: () => void;
+  loading: boolean;
+}) {
   const form = useForm<z.infer<typeof balanceSchema>>({
     resolver: zodResolver(balanceSchema),
     defaultValues: {
       name: '',
-      value: 0,
+      amount: 0,
       currency: '',
     },
   });
 
+  const utils = api.useUtils();
+  const { mutate } = api.balances.addBalance.useMutation({
+    onSuccess: async () => {
+      await utils.balances.getBalances.refetch();
+      form.reset();
+      submitCallback();
+    },
+  });
   const handleSubmit = async (values: z.infer<typeof balanceSchema>) => {
-    console.log(values);
+    doneCallback();
+    mutate(values);
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-6">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className={`flex flex-col gap-6 ${loading && 'blur'}`}>
         <FormField
           control={form.control}
           name="name"
@@ -54,7 +72,7 @@ export default function AddBalanceForm() {
         />
         <FormField
           control={form.control}
-          name="value"
+          name="amount"
           render={({ field }) => (
             <FormItem>
               <FormLabel>

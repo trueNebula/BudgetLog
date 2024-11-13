@@ -13,6 +13,7 @@ import {
 
 const createTable = pgTableCreator((name) => `budgetlog_${name}`);
 
+// Tables
 export const test = createTable('test', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 256 }),
@@ -63,15 +64,6 @@ export const accounts = createTable(
     userIdIdx: index('account_user_id_idx').on(account.userId),
   }),
 );
-
-export const usersRelations = relations(users, ({ many }) => ({
-  accounts: many(accounts),
-}));
-
-export const accountsRelations = relations(accounts, ({ one }) => ({
-  user: one(users, { fields: [accounts.userId], references: [users.id] }),
-}));
-
 export const sessions = createTable(
   'session',
   {
@@ -88,11 +80,6 @@ export const sessions = createTable(
     userIdIdx: index('session_user_id_idx').on(session.userId),
   }),
 );
-
-export const sessionsRelations = relations(sessions, ({ one }) => ({
-  user: one(users, { fields: [sessions.userId], references: [users.id] }),
-}));
-
 export const verificationTokens = createTable(
   'verification_token',
   {
@@ -107,3 +94,31 @@ export const verificationTokens = createTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   }),
 );
+
+export const balances = createTable('balance', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 50 }).notNull(),
+  amount: integer('amount').notNull(),
+  currency: varchar('currency', { length: 255 }).notNull(),
+  userId: varchar('user_id', { length: 255 })
+    .notNull()
+    .references(() => users.id),
+});
+
+// Relations
+export const usersRelations = relations(users, ({ many }) => ({
+  accounts: many(accounts),
+  balances: many(balances),
+}));
+
+export const accountsRelations = relations(accounts, ({ one }) => ({
+  user: one(users, { fields: [accounts.userId], references: [users.id] }),
+}));
+
+export const sessionsRelations = relations(sessions, ({ one }) => ({
+  user: one(users, { fields: [sessions.userId], references: [users.id] }),
+}));
+
+export const balancesRelations = relations(balances, ({ one }) => ({
+  user: one(users, { fields: [balances.userId], references: [users.id] }),
+}));
