@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BudgetLog
 
-## Getting Started
+A budget tracking and accounting platform aimed at businesses and casual users.
 
-First, run the development server:
+```
+nextjs: v14.2.8
+react: v18.3.1
+trpc: v11.0.0
+styling: Tailwind CSS
+entry point: src/app/page.tsx
+styling guide: Airbnb - https://github.com/airbnb/javascript
+package installer/runtime: bun
+```
+
+## Development
+
+You can follow the active development of BudgetLog either on [GitHub](https://github.com/trueNebula/BudgetLog), on [Plane](https://app.plane.so/truenebula/projects/05121f97-6c34-4fbe-b762-f2a5c9ba3e91/views/78f1646b-fa3e-4385-a7bd-05c70644e61e/) or (if you're lucky), [online](https://buget-log.vercel.app/).
+
+Feel free to create pull requests on Github if you want to contribute.
+
+## Installation
+
+First, install the required packages:
+
+```bash
+npm i
+# or
+bun install
+```
+
+You will need to have a PostgreSQL server running. Once this is done, run the needed migrations:
+
+```bash
+npx drizzle-kit migrate
+# or
+bun drizzle-kit migrate
+```
+
+Copy the example environment file (`.env.example`) and rename it to `.env`. Fill in the `DATABASE_URL` variable with the URL to your PostgreSQL database.
+
+Follow the [NextAuth tutorial](https://next-auth.js.org/providers/google) in order to set up the Google OAuth variables. You will need these in order to properly run the project locally.
+
+Feel free to customize the other variables to your liking, according to the given comments.
+
+Then run the development server:
 
 ```bash
 npm run dev
 # or
-yarn dev
-# or
-pnpm dev
-# or
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The local project will be available at [localhost:3000](locahost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Database Changes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [Drizzle ORM](https://orm.drizzle.team/) and [PostgreSQL](https://www.postgresql.org/). The database schema is available at `src/server/db/schema.ts`. Any modifications made to it will have to be transpiled into a migration.
 
-## Learn More
+Once modified, run:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx drizzle-kit generate --name <migration name>
+npx drizzle-kit migrate
+# or
+bun drizzle-kit generate --name <migration name>
+bun drizzle-kit migrate
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This will bring any changes made to the schema file into your database.
