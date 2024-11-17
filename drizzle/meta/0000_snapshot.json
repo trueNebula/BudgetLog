@@ -97,12 +97,8 @@
           "name": "budgetlog_account_user_id_budgetlog_user_id_fk",
           "tableFrom": "budgetlog_account",
           "tableTo": "budgetlog_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -110,10 +106,7 @@
       "compositePrimaryKeys": {
         "budgetlog_account_provider_provider_account_id_pk": {
           "name": "budgetlog_account_provider_provider_account_id_pk",
-          "columns": [
-            "provider",
-            "provider_account_id"
-          ]
+          "columns": ["provider", "provider_account_id"]
         }
       },
       "uniqueConstraints": {}
@@ -163,12 +156,8 @@
           "name": "budgetlog_session_user_id_budgetlog_user_id_fk",
           "tableFrom": "budgetlog_session",
           "tableTo": "budgetlog_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -281,10 +270,7 @@
       "compositePrimaryKeys": {
         "budgetlog_verification_token_identifier_token_pk": {
           "name": "budgetlog_verification_token_identifier_token_pk",
-          "columns": [
-            "identifier",
-            "token"
-          ]
+          "columns": ["identifier", "token"]
         }
       },
       "uniqueConstraints": {}

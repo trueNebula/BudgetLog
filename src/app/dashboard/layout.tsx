@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+
 import TRPCReactProvider from '@/trcp/react.tsx';
 
 export const metadata: Metadata = {

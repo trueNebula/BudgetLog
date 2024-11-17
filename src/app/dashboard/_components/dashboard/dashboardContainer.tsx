@@ -5,7 +5,7 @@ import { createSwapy, Swapy } from 'swapy';
 import Tips from '@/app/dashboard/_components/dashboard/tips';
 import Incomes from '@/app/dashboard/_components/dashboard/incomes';
 import Savings from '@/app/dashboard/_components/dashboard/savings';
-import Balances from '@/app/dashboard/_components/dashboard/balancesCard';
+import Balances from '@/app/dashboard/_components/dashboard/balances';
 import Expenses from '@/app/dashboard/_components/dashboard/expenses';
 import Investments from '@/app/dashboard/_components/dashboard/investments';
 import { useDashboardStore } from '@/app/stores/useDashboardStore.ts';

@@ -1,0 +1,1 @@
+ALTER TABLE "budgetlog_balance" ADD COLUMN "updated_at" timestamp with time zone DEFAULT now();

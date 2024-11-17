@@ -10,6 +10,7 @@ export default async function Dashboard() {
   }
 
   if (!session.user.name || !session.user.image) {
+    // eslint-disable-next-line no-console
     console.error('User data is missing');
     return null;
   }

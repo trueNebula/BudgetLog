@@ -103,6 +103,9 @@ export const balances = createTable('balance', {
   userId: varchar('user_id', { length: 255 })
     .notNull()
     .references(() => users.id),
+  updatedAt: timestamp('updated_at', { withTimezone: true })
+    .defaultNow()
+    .$onUpdate(() => new Date()),
 });
 
 // Relations

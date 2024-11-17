@@ -1,6 +1,6 @@
 {
-  "id": "9217a293-0026-4ebe-9a34-069ad63ad5c6",
-  "prevId": "8d7f564a-2606-402e-a36a-c7a273c949fb",
+  "id": "cef20f75-e517-46f3-96d4-a5e14bde872c",
+  "prevId": "9217a293-0026-4ebe-9a34-069ad63ad5c6",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -97,8 +97,12 @@
           "name": "budgetlog_account_user_id_budgetlog_user_id_fk",
           "tableFrom": "budgetlog_account",
           "tableTo": "budgetlog_user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -106,7 +110,10 @@
       "compositePrimaryKeys": {
         "budgetlog_account_provider_provider_account_id_pk": {
           "name": "budgetlog_account_provider_provider_account_id_pk",
-          "columns": ["provider", "provider_account_id"]
+          "columns": [
+            "provider",
+            "provider_account_id"
+          ]
         }
       },
       "uniqueConstraints": {}
@@ -144,6 +151,13 @@
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
         }
       },
       "indexes": {},
@@ -152,8 +166,12 @@
           "name": "budgetlog_balance_user_id_budgetlog_user_id_fk",
           "tableFrom": "budgetlog_balance",
           "tableTo": "budgetlog_user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -206,8 +224,12 @@
           "name": "budgetlog_session_user_id_budgetlog_user_id_fk",
           "tableFrom": "budgetlog_session",
           "tableTo": "budgetlog_user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -320,7 +342,10 @@
       "compositePrimaryKeys": {
         "budgetlog_verification_token_identifier_token_pk": {
           "name": "budgetlog_verification_token_identifier_token_pk",
-          "columns": ["identifier", "token"]
+          "columns": [
+            "identifier",
+            "token"
+          ]
         }
       },
       "uniqueConstraints": {}
