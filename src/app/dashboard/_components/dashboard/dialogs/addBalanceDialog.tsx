@@ -1,6 +1,7 @@
-import AddBalanceForm from '@/app/dashboard/_components/dashboard/forms/addBalanceForm';
+import { useState } from 'react';
 import Loader from '@/components/loader.tsx';
-import { Button } from '@/components/ui/button';
+import RoundButton from '@/components/ui/roundButton';
+import AddBalanceForm from '@/app/dashboard/_components/dashboard/forms/addBalanceForm';
 import {
   Dialog,
   DialogContent,
@@ -9,7 +10,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { useState } from 'react';
 
 export default function AddBalanceDialog() {
   const [open, setOpen] = useState(false);
@@ -26,9 +26,7 @@ export default function AddBalanceDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button type="button" variant="secondary" className="rounded-full">
-          +
-        </Button>
+        <RoundButton variant="plus" />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader className={`${loading && 'blur'}`}>

@@ -75,3 +75,8 @@
     color: var(--secondary);
   }
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}

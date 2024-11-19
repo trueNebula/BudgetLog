@@ -12,3 +12,10 @@ export const getFromLocalStorage = (key: string) => {
 
   return window.localStorage.getItem(key);
 };
+
+export const columnPlacement = {
+  description: 'text-left',
+  amount: 'text-center',
+  excludeFromAnalytics: 'text-center',
+  realizedAt: 'text-right',
+};
