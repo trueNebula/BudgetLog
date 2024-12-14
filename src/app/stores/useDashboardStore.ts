@@ -22,7 +22,6 @@ const saveState = (state: IDashboardStore) => {
   localStorage.setItem(
     'dashboardPrefs',
     JSON.stringify({
-      isDashboardLocked: state.isDashboardLocked,
       isBalancesVisible: state.isBalancesVisible,
       isIncomeStreamsVisible: state.isIncomeStreamsVisible,
       isExpensesVisible: state.isExpensesVisible,
@@ -34,7 +33,7 @@ const saveState = (state: IDashboardStore) => {
 };
 
 const getState = (state: string): boolean => {
-  const savedState = getFromLocalStorage(state);
+  const savedState = getFromLocalStorage('dashboardPrefs');
   if (!savedState) {
     return true;
   }
@@ -42,10 +41,9 @@ const getState = (state: string): boolean => {
 };
 
 export const useDashboardStore = create<IDashboardStore>((set, get) => ({
-  isDashboardLocked: getState('isDashboardLocked'),
+  isDashboardLocked: true,
   toggleDashboardLocked: () => {
     set((state) => ({ isDashboardLocked: !state.isDashboardLocked }));
-    saveState(get());
   },
   isBalancesVisible: getState('isBalancesVisible'),
   toggleBalancesVisible: () => {

@@ -45,7 +45,7 @@
     "react-slot-counter": "^3.0.1",
     "react-time-ago": "^7.3.3",
     "superjson": "^2.2.1",
-    "swapy": "^0.4.2",
+    "swapy": "^1.0.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "vite": "^5.4.8",

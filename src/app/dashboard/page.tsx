@@ -1,6 +1,19 @@
 import { getAuthSession } from '@/server/auth';
 import Navbar from '@/app/dashboard/_components/navbar/navbar';
-import DashboardContainer from '@/app/dashboard/_components/dashboard/dashboardContainer';
+import dynamic from 'next/dynamic';
+import Loader from '@/components/loader';
+
+const DashboardContainer = dynamic(
+  () => import('@/app/dashboard/_components/dashboard/dashboardContainer'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-full w-full flex justify-center items-center">
+        <Loader />
+      </div>
+    ),
+  },
+);
 
 export default async function Dashboard() {
   const session = await getAuthSession();
@@ -24,7 +37,7 @@ export default async function Dashboard() {
   return (
     <div className="min-h-screen w-full flex justify-between">
       <Navbar user={loggedUser} />
-      <main className="min-h-screen grow">
+      <main className="min-h-screen grow ">
         <DashboardContainer />
       </main>
     </div>

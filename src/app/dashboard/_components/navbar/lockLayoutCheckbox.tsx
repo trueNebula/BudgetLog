@@ -8,8 +8,8 @@ import {
 import { LockKey, LockKeyOpen } from '@phosphor-icons/react';
 
 export default function LockLayout() {
-  const toggleDashboardLocked = useDashboardStore((state) => state.toggleDashboardLocked);
   const isDashboardLocked = useDashboardStore((state) => state.isDashboardLocked);
+  const toggleDashboardLocked = useDashboardStore((state) => state.toggleDashboardLocked);
 
   return (
     <TooltipProvider>

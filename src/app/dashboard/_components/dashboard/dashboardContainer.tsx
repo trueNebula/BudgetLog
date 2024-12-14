@@ -9,8 +9,8 @@ import Balances from '@/app/dashboard/_components/dashboard/balances';
 import Expenses from '@/app/dashboard/_components/dashboard/expenses';
 import Investments from '@/app/dashboard/_components/dashboard/investments';
 import { useDashboardStore } from '@/app/stores/useDashboardStore.ts';
-import '@/styles/dashboard.scss';
 import { getFromLocalStorage } from '@/lib/utils';
+import '@/styles/dashboard.scss';
 
 const DEFAULT_LAYOUT = {
   1: 'a',
@@ -60,16 +60,16 @@ export default function DashboardContainer() {
     const container = document.querySelector('.container');
     const slots = document.querySelectorAll('.slot');
     const items = document.querySelectorAll('.item');
-    swapyRef.current = createSwapy(container, {
-      animation: 'spring',
-      swapMode: 'drop',
+    swapyRef.current = createSwapy(container as HTMLElement, {
+      animation: 'dynamic',
+      swapMode: 'hover',
     });
     const swapy = swapyRef.current;
 
     swapy.enable(false);
 
-    swapy.onSwap(({ data }) => {
-      const json = JSON.stringify(data.object);
+    swapy.onSwap(({ newSlotItemMap: data }) => {
+      const json = JSON.stringify(data.asObject);
       localStorage.setItem('layout', json);
     });
 
